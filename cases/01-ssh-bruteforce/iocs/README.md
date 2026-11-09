@@ -6,7 +6,7 @@ This folder contains artifacts from the case.
 
 ## Files
 
-- `auth.log` — reconstructed fragment of `/var/log/auth.log` from the target host `u3`.
+- `auth.log.fragment` — reconstructed fragment of `/var/log/auth.log` from the target host `u3`.
 - `screenshots/` — placeholder for Wazuh SIEM screenshots and terminal evidence.
 
 ## Notes

@@ -1,0 +1,43 @@
+# Fragment of /var/log/auth.log from the target host u3 during the brute-force
+# Timestamps are approximate and reconstructed from Wazuh alert timeline.
+
+Nov 09 19:48:35 u3 sshd[1000]: Failed password for u3 from 192.168.100.20 port 50000 ssh2
+Nov 09 19:48:34 u3 unix_chkpwd[2001]: password check failed for user (u3)
+Nov 09 19:48:34 u3 sshd[1002]: Failed password for u3 from 192.168.100.20 port 50002 ssh2
+Nov 09 19:48:34 u3 unix_chkpwd[2003]: password check failed for user (u3)
+Nov 09 19:48:35 u3 sshd[1004]: Failed password for u3 from 192.168.100.20 port 50004 ssh2
+Nov 09 19:48:34 u3 unix_chkpwd[2005]: password check failed for user (u3)
+Nov 09 19:48:35 u3 sshd[1006]: Failed password for u3 from 192.168.100.20 port 50006 ssh2
+Nov 09 19:48:34 u3 unix_chkpwd[2007]: password check failed for user (u3)
+Nov 09 19:48:34 u3 sshd[1008]: Failed password for u3 from 192.168.100.20 port 50008 ssh2
+Nov 09 19:48:34 u3 unix_chkpwd[2009]: password check failed for user (u3)
+Nov 09 19:48:35 u3 sshd[1010]: Failed password for u3 from 192.168.100.20 port 50010 ssh2
+Nov 09 19:48:35 u3 unix_chkpwd[2011]: password check failed for user (u3)
+Nov 09 19:48:35 u3 sshd[1012]: Failed password for u3 from 192.168.100.20 port 50012 ssh2
+Nov 09 19:48:34 u3 unix_chkpwd[2013]: password check failed for user (u3)
+Nov 09 19:48:34 u3 sshd[1014]: Failed password for u3 from 192.168.100.20 port 50014 ssh2
+Nov 09 19:48:35 u3 unix_chkpwd[2015]: password check failed for user (u3)
+Nov 09 19:48:35 u3 sshd[1016]: Failed password for u3 from 192.168.100.20 port 50016 ssh2
+Nov 09 19:48:34 u3 unix_chkpwd[2017]: password check failed for user (u3)
+Nov 09 19:48:34 u3 sshd[1018]: Failed password for u3 from 192.168.100.20 port 50018 ssh2
+Nov 09 19:48:34 u3 unix_chkpwd[2019]: password check failed for user (u3)
+Nov 09 19:48:35 u3 sshd[1020]: Failed password for u3 from 192.168.100.20 port 50020 ssh2
+Nov 09 19:48:34 u3 unix_chkpwd[2021]: password check failed for user (u3)
+Nov 09 19:48:35 u3 sshd[1022]: Failed password for u3 from 192.168.100.20 port 50022 ssh2
+Nov 09 19:48:34 u3 unix_chkpwd[2023]: password check failed for user (u3)
+Nov 09 19:48:34 u3 sshd[1024]: Failed password for u3 from 192.168.100.20 port 50024 ssh2
+Nov 09 19:48:34 u3 unix_chkpwd[2025]: password check failed for user (u3)
+Nov 09 19:48:34 u3 sshd[1026]: Failed password for u3 from 192.168.100.20 port 50026 ssh2
+Nov 09 19:48:34 u3 unix_chkpwd[2027]: password check failed for user (u3)
+Nov 09 19:48:35 u3 sshd[1028]: Failed password for u3 from 192.168.100.20 port 50028 ssh2
+Nov 09 19:48:34 u3 unix_chkpwd[2029]: password check failed for user (u3)
+Nov 09 19:48:34 u3 sshd[1030]: Failed password for u3 from 192.168.100.20 port 50030 ssh2
+Nov 09 19:48:34 u3 unix_chkpwd[2031]: password check failed for user (u3)
+Nov 09 19:48:34 u3 sshd[1032]: Failed password for u3 from 192.168.100.20 port 50032 ssh2
+Nov 09 19:48:34 u3 unix_chkpwd[2033]: password check failed for user (u3)
+Nov 09 19:48:35 u3 sshd[1034]: Failed password for u3 from 192.168.100.20 port 50034 ssh2
+Nov 09 19:48:35 u3 unix_chkpwd[2035]: password check failed for user (u3)
+Nov 09 19:48:35 u3 sshd[1036]: Failed password for u3 from 192.168.100.20 port 50036 ssh2
+Nov 09 19:48:36 u3 sshd[1038]: Accepted password for u3 from 192.168.100.20 port 50342 ssh2
+Nov 09 19:48:36 u3 systemd-logind[450]: New session 42 of user u3.
+Nov 09 19:48:36 u3 systemd-logind[450]: Session 42 logged out.
