@@ -13,7 +13,7 @@ Hands-on case from a home lab. Full cycle: **attacker (Kali) → target (Ubuntu 
 | **Date** | 2026-11-09 |
 | **Difficulty** | Junior / L1 |
 | **Domain** | SOC, Incident Response, Linux hardening |
-| **MITRE ATT&CK** | T1110 Brute Force, T1021.004 Remote Services: SSH |
+| **MITRE ATT&CK** | T1110 Brute Force, T1078 Valid Accounts, T1021.004 Remote Services: SSH |
 | **SIEM** | Wazuh 4.14 (single-node, Docker) |
 
 ## Summary
@@ -61,7 +61,11 @@ The password `u3:1` is in the wordlist — the attack succeeds on one of the las
 
 ## Detection in Wazuh
 
-The agent on `u3` forwards events to the SIEM. Timeline of a single cycle (~2 seconds):
+The agent on `u3` forwards events to the SIEM. During the attack Wazuh reported **40 total alerts**, including **37 authentication failures** and **1 authentication success**:
+
+![Wazuh dashboard — 40 total alerts, 37 auth failures, 1 success](iocs/screenshots/wazuh-dashboard.png)
+
+Timeline of the correlation cycle (~2 seconds):
 
 | Time (UTC) | Rule ID | Level | Description |
 |---|---|---|---|
@@ -71,16 +75,21 @@ The agent on `u3` forwards events to the SIEM. Timeline of a single cycle (~2 se
 | 19:48:36 | 5501 | 3 | `PAM: Login session opened` — **login succeeded** |
 | 19:48:36 | 5502 | 3 | `PAM: Login session closed` |
 | 19:48:36 | 2502 | 10 | `User missed the password more than one time` |
-| 19:48:36 | **40112** | **12** | **«Multiple authentication failures followed by a success»** |
+| **2026-11-09T19:48:36.077Z** | **40112** | **12** | **«Multiple authentication failures followed by a success»** |
 
 ### Key alert
 
-The key event is correlation rule **40112**: a burst of failed authentication attempts followed by a success. This exact "failures → success" pattern is what separates brute-force from an ordinary user typo.
+The key event is correlation rule **40112** at `2026-11-09T19:48:36.077Z`: a burst of failed authentication attempts followed by a success. This exact "failures → success" pattern is what separates brute-force from an ordinary user typo.
+
+![Wazuh rule 40112 — alert details](iocs/screenshots/wazuh-rule-40112-details.png)
+
+![Wazuh rule 40112 — MITRE mapping](iocs/screenshots/wazuh-rule-40112-mitre.png)
 
 ### MITRE ATT&CK mapping
 
 - **T1110** Brute Force (Credential Access)
-- The successful follow-up login maps to **T1021.004** Remote Services: SSH
+- **T1078** Valid Accounts — successful use of the compromised `u3` credentials (Defense Evasion / Persistence / Privilege Escalation / Initial Access)
+- The follow-up SSH session maps to **T1021.004** Remote Services: SSH
 
 ---
 
@@ -109,9 +118,9 @@ L1 never logs into the server and changes nothing — the job is to confirm or r
 ```
 [ESCALATION][P2] SSH brute-force SUCCESS on u3 (192.168.100.24)
 Rule: 40112 "Multiple authentication failures followed by a success" (L12)
-Time: Nov 9, 19:48:36 UTC
+Time: 2026-11-09T19:48:36.077Z
 Target: host u3 / account "u3"
-Source: 192.168.100.20 (internal — verify ownership in CMDB)
+Source: 192.168.100.20:32778 (internal — verify ownership in CMDB)
 Evidence: ~37 alert events in <2s (5760/5557), then PAM session opened (5501)
 Context: no prior alerts on host in 24h; account is a standard user
 Requested: block 192.168.100.20 at firewall, force password reset for u3,

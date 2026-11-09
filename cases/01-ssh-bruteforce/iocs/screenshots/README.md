@@ -1,20 +1,13 @@
 # Screenshots
 
-This folder should contain evidence screenshots from the Wazuh SIEM and the target host.
+Real evidence screenshots from the lab Wazuh SIEM.
 
-## Required screenshots
+## Files
 
-1. **Wazuh Security Events dashboard** showing the alert burst around rule 40112.
-2. **Alert detail view** for rule 40112 — full time, source IP, target user, and rule description.
-3. **Timeline of failed attempts** — multiple rows of rule 5760 / 5557 leading up to the success.
-4. **PAM session opened / closed** (rule 5501 / 5502) confirming the successful login.
-5. **`/var/log/auth.log` terminal view** on the target host showing `Accepted password`.
-6. **`last` output** showing the SSH session from `192.168.100.20`.
+- `wazuh-dashboard.png` — dashboard summary: 40 total alerts, 37 authentication failures, 1 authentication success, 1 level-12+ alert.
+- `wazuh-rule-40112-details.png` — detailed view of correlation rule 40112 (`Multiple authentication failures followed by a success`), showing source IP `192.168.100.20`, target `u3`, and `Accepted password` log entry.
+- `wazuh-rule-40112-mitre.png` — MITRE ATT&CK mapping for rule 40112: **T1110 Brute Force** and **T1078 Valid Accounts**, level 12.
 
-## Before uploading
+## Redaction check
 
-- [ ] Verify no real personal email, domain, or public IP is visible.
-- [ ] Blur or crop any unrelated hosts / users.
-- [ ] Ensure hostnames, IPs, and account names match the lab only (`192.168.100.20`, `192.168.100.24`, `u3`).
-
-> I do not have access to your lab environment, so I cannot create real Wazuh screenshots. Please export them from your SIEM and drop the PNG/JPG files here.
+Before uploading, I verified that no real personal email, public IP, or unrelated hostname is visible. Only lab artifacts are shown (`192.168.100.20`, `192.168.100.24`, account `u3`).
