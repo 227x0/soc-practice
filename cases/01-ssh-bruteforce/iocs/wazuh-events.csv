@@ -1,0 +1,41 @@
+timestamp,agent.name,rule.description,rule.level,rule.id
+"Nov 9, 2026 @ 19:48:36.131",u3,syslog: User missed the password more than one time,10,2502
+"Nov 9, 2026 @ 19:48:36.122",u3,syslog: User missed the password more than one time,10,2502
+"Nov 9, 2026 @ 19:48:36.115",u3,syslog: User missed the password more than one time,10,2502
+"Nov 9, 2026 @ 19:48:36.100",u3,PAM: Login session closed.,3,5502
+"Nov 9, 2026 @ 19:48:36.094",u3,sshd: authentication failed.,5,5760
+"Nov 9, 2026 @ 19:48:36.093",u3,sshd: authentication failed.,5,5760
+"Nov 9, 2026 @ 19:48:36.089",u3,sshd: authentication failed.,5,5760
+"Nov 9, 2026 @ 19:48:36.080",u3,PAM: Login session opened.,3,5501
+"Nov 9, 2026 @ 19:48:36.077",u3,Multiple authentication failures followed by a success.,12,40112
+"Nov 9, 2026 @ 19:48:36.075",u3,unix_chkpwd: Password check failed.,5,5557
+"Nov 9, 2026 @ 19:48:36.072",u3,unix_chkpwd: Password check failed.,5,5557
+"Nov 9, 2026 @ 19:48:34.077",u3,sshd: authentication failed.,5,5760
+"Nov 9, 2026 @ 19:48:34.075",u3,sshd: authentication failed.,5,5760
+"Nov 9, 2026 @ 19:48:34.072",u3,sshd: authentication failed.,5,5760
+"Nov 9, 2026 @ 19:48:34.070",u3,unix_chkpwd: Password check failed.,5,5557
+"Nov 9, 2026 @ 19:48:32.076",u3,sshd: authentication failed.,5,5760
+"Nov 9, 2026 @ 19:48:32.072",u3,unix_chkpwd: Password check failed.,5,5557
+"Nov 9, 2026 @ 19:48:32.070",u3,unix_chkpwd: Password check failed.,5,5557
+"Nov 9, 2026 @ 19:48:32.068",u3,unix_chkpwd: Password check failed.,5,5557
+"Nov 9, 2026 @ 19:48:30.073",u3,sshd: brute force trying to get access to the system. Authentication failed.,10,5763
+"Nov 9, 2026 @ 19:48:30.070",u3,sshd: authentication failed.,5,5760
+"Nov 9, 2026 @ 19:48:30.069",u3,sshd: authentication failed.,5,5760
+"Nov 9, 2026 @ 19:48:30.069",u3,unix_chkpwd: Password check failed.,5,5557
+"Nov 9, 2026 @ 19:48:28.075",u3,sshd: authentication failed.,5,5760
+"Nov 9, 2026 @ 19:48:28.073",u3,unix_chkpwd: Password check failed.,5,5557
+"Nov 9, 2026 @ 19:48:28.070",u3,unix_chkpwd: Password check failed.,5,5557
+"Nov 9, 2026 @ 19:48:28.067",u3,unix_chkpwd: Password check failed.,5,5557
+"Nov 9, 2026 @ 19:48:28.065",u3,sshd: authentication failed.,5,5760
+"Nov 9, 2026 @ 19:48:28.065",u3,sshd: authentication failed.,5,5760
+"Nov 9, 2026 @ 19:48:26.065",u3,sshd: authentication failed.,5,5760
+"Nov 9, 2026 @ 19:48:26.064",u3,sshd: authentication failed.,5,5760
+"Nov 9, 2026 @ 19:48:26.064",u3,unix_chkpwd: Password check failed.,5,5557
+"Nov 9, 2026 @ 19:48:24.081",u3,unix_chkpwd: Password check failed.,5,5557
+"Nov 9, 2026 @ 19:48:24.081",u3,PAM: User login failed.,5,5503
+"Nov 9, 2026 @ 19:48:24.081",u3,PAM: User login failed.,5,5503
+"Nov 9, 2026 @ 19:48:24.081",u3,PAM: User login failed.,5,5503
+"Nov 9, 2026 @ 19:48:24.081",u3,unix_chkpwd: Password check failed.,5,5557
+"Nov 9, 2026 @ 19:48:24.080",u3,unix_chkpwd: Password check failed.,5,5557
+"Nov 9, 2026 @ 19:48:24.080",u3,unix_chkpwd: Password check failed.,5,5557
+"Nov 9, 2026 @ 19:48:24.080",u3,PAM: User login failed.,5,5503

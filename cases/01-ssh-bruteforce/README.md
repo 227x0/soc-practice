@@ -49,7 +49,7 @@ hydra -l u3 -P ~/lab-pass.txt -t 4 -V -I ssh://192.168.100.24
 The password `u3:1` is in the wordlist — the attack succeeds on one of the last iterations.
 
 > **Why the alert count is higher than the password count.**  
-> The wordlist has ~16 entries, but Wazuh logged ~37 alert events. One failed SSH password attempt can produce multiple log lines (for example, `sshd` rule **5760** and `unix_chkpwd` rule **5557**), so the number of alerts is larger than the number of tried passwords.
+> The wordlist has ~16 entries, but Wazuh logged **40 alert events**. One failed SSH password attempt can produce multiple log lines (for example, `sshd` rule **5760**, `unix_chkpwd` rule **5557**, and `PAM` rule **5503**), so the number of alerts is larger than the number of tried passwords.
 
 ### Why this works
 
@@ -65,17 +65,20 @@ The agent on `u3` forwards events to the SIEM. During the attack Wazuh reported 
 
 ![Wazuh dashboard — 40 total alerts, 37 auth failures, 1 success](iocs/screenshots/wazuh-dashboard.png)
 
-Timeline of the correlation cycle (~2 seconds):
+The full attack window in the exported event log is **~12 seconds** (`19:48:24` → `19:48:36`).
 
-| Time (UTC) | Rule ID | Level | Description |
+### Event breakdown (from raw Wazuh export)
+
+| Count | Rule ID | Level | Description |
 |---|---|---|---|
-| 19:48:34 | 5760 | 5 | `sshd: authentication failed` |
-| 19:48:36 | 5557 | 5 | `unix_chkpwd: Password check failed` |
-| … | … | … | ~37 alert events in a row |
-| 19:48:36 | 5501 | 3 | `PAM: Login session opened` — **login succeeded** |
-| 19:48:36 | 5502 | 3 | `PAM: Login session closed` |
-| 19:48:36 | 2502 | 10 | `User missed the password more than one time` |
-| **2026-11-09T19:48:36.077Z** | **40112** | **12** | **«Multiple authentication failures followed by a success»** |
+| 15 | 5557 | 5 | `unix_chkpwd: Password check failed` |
+| 14 | 5760 | 5 | `sshd: authentication failed` |
+| 4 | 5503 | 5 | `PAM: User login failed` |
+| 3 | 2502 | 10 | `User missed the password more than one time` |
+| 1 | 5763 | 10 | `sshd: brute force trying to get access to the system` |
+| 1 | 5501 | 3 | `PAM: Login session opened` — **login succeeded** |
+| 1 | 5502 | 3 | `PAM: Login session closed` |
+| 1 | **40112** | **12** | **«Multiple authentication failures followed by a success»** |
 
 ### Key alert
 
@@ -84,6 +87,10 @@ The key event is correlation rule **40112** at `2026-11-09T19:48:36.077Z`: a bur
 ![Wazuh rule 40112 — alert details](iocs/screenshots/wazuh-rule-40112-details.png)
 
 ![Wazuh rule 40112 — MITRE mapping](iocs/screenshots/wazuh-rule-40112-mitre.png)
+
+### Raw event export
+
+The full Wazuh event export used for this analysis is available here: [`iocs/wazuh-events.csv`](iocs/wazuh-events.csv).
 
 ### MITRE ATT&CK mapping
 
@@ -97,7 +104,7 @@ The key event is correlation rule **40112** at `2026-11-09T19:48:36.077Z`: a bur
 
 L1 never logs into the server and changes nothing — the job is to confirm or rule out a false positive within 10–15 minutes and package the facts for L2.
 
-1. **Validation.** 37 alert events in under 2 seconds is a machine pattern, not a human. A successful session immediately follows the failure burst.
+1. **Validation.** 40 alert events in ~12 seconds is a machine pattern, not a human. A successful PAM session immediately follows the failure burst.
 2. **False-positive check.** `srcip 192.168.100.20` is an internal Kali host. In a real SOC, cross-check the asset inventory / authorized-scanner allowlists. Forgotten cron jobs and "user typos" are excluded by the pattern.
 3. **Enrichment.** The target is a standard account `u3` on a test host; there are no anomalies on this host in the 24 hours before the incident; the post-success session is short (opened and closed within the same second — typical brute-force "did it work?" verification behavior).
 4. **Verdict: true positive, P2** — successful brute-force.
@@ -121,7 +128,7 @@ Rule: 40112 "Multiple authentication failures followed by a success" (L12)
 Time: 2026-11-09T19:48:36.077Z
 Target: host u3 / account "u3"
 Source: 192.168.100.20:32778 (internal — verify ownership in CMDB)
-Evidence: ~37 alert events in <2s (5760/5557), then PAM session opened (5501)
+Evidence: 40 alert events in ~12s (5760/5557/5503), then PAM session opened (5501)
 Context: no prior alerts on host in 24h; account is a standard user
 Requested: block 192.168.100.20 at firewall, force password reset for u3,
            review post-auth activity (last, auth.log, bash_history)
@@ -166,7 +173,7 @@ sudo iptables -A INPUT -p tcp -s 192.168.100.20 --dport 22 -j DROP
 | Account | `u3` |
 | Tool | hydra v9.x, ~16-password wordlist |
 | Wazuh rule | 40112 (L12) |
-| Indicators | ~37 alert events (mostly 5760/5557) within 2 seconds, then PAM session opened (5501) |
+| Indicators | 40 alert events (5760/5557/5503/5763) within ~12 seconds, then PAM session opened (5501) |
 
 ---
 
