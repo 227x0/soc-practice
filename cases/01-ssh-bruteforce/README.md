@@ -92,6 +92,8 @@ The key event is correlation rule **40112** at `2026-11-09T19:48:36.077Z`: a bur
 
 The full Wazuh event export used for this analysis is available here: [`iocs/wazuh-events.csv`](iocs/wazuh-events.csv).
 
+A 5-page **Wazuh Threat Hunting report** for agent `u3` (PDF export) is also available: [`iocs/wazuh-threat-hunting-report.pdf`](iocs/wazuh-threat-hunting-report.pdf).
+
 ### MITRE ATT&CK mapping
 
 - **T1110** Brute Force (Credential Access)
