@@ -1,9 +1,15 @@
+> All IPs and accounts are fictional and used only in a home lab.
+
 # IOCs
 
-Place case artifacts here:
+This folder contains artifacts from the case.
 
-- `auth.log` — fragment of `/var/log/auth.log` from the time of the attack.
-- `wazuh-alerts.json` — export of related Wazuh alerts.
-- `screenshots/` — event timeline and dashboard screenshots.
+## Files
 
-> All IPs and accounts are fictional and used only in a home lab.
+- `auth.log` — reconstructed fragment of `/var/log/auth.log` from the target host `u3`.
+- `screenshots/` — placeholder for Wazuh SIEM screenshots and terminal evidence.
+
+## Notes
+
+- The `auth.log` fragment is reconstructed from the Wazuh alert timeline (`~37 alert events` followed by a successful PAM session).
+- Real Wazuh screenshots must be exported from the lab SIEM and added to `screenshots/`.

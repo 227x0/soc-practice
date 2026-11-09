@@ -1,6 +1,6 @@
 # SOC Practice Cases
 
-> Home cybersecurity lab: hands-on SOC L1/L2 cases.  
+> Home cybersecurity lab: hands-on SOC L1 cases.  
 > Each case covers the full cycle: **attack → detection → triage → escalation → response**.
 
 ## Cases

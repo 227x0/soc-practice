@@ -9,8 +9,8 @@ Hands-on case from a home lab. Full cycle: **attacker (Kali) → target (Ubuntu 
 
 | Field | Value |
 |---|---|
-| **Case ID** | SOC-2024-001 |
-| **Date** | 2024-11-09 |
+| **Case ID** | SOC-2026-001 |
+| **Date** | 2026-11-09 |
 | **Difficulty** | Junior / L1 |
 | **Domain** | SOC, Incident Response, Linux hardening |
 | **MITRE ATT&CK** | T1110 Brute Force, T1021.004 Remote Services: SSH |
@@ -48,6 +48,9 @@ hydra -l u3 -P ~/lab-pass.txt -t 4 -V -I ssh://192.168.100.24
 
 The password `u3:1` is in the wordlist — the attack succeeds on one of the last iterations.
 
+> **Why the alert count is higher than the password count.**  
+> The wordlist has ~16 entries, but Wazuh logged ~37 alert events. One failed SSH password attempt can produce multiple log lines (for example, `sshd` rule **5760** and `unix_chkpwd` rule **5557**), so the number of alerts is larger than the number of tried passwords.
+
 ### Why this works
 
 - The target account `u3` has a **weak password** (`1`).
@@ -64,7 +67,7 @@ The agent on `u3` forwards events to the SIEM. Timeline of a single cycle (~2 se
 |---|---|---|---|
 | 19:48:34 | 5760 | 5 | `sshd: authentication failed` |
 | 19:48:36 | 5557 | 5 | `unix_chkpwd: Password check failed` |
-| … | … | … | ~37 failed attempts in a row |
+| … | … | … | ~37 alert events in a row |
 | 19:48:36 | 5501 | 3 | `PAM: Login session opened` — **login succeeded** |
 | 19:48:36 | 5502 | 3 | `PAM: Login session closed` |
 | 19:48:36 | 2502 | 10 | `User missed the password more than one time` |
@@ -85,7 +88,7 @@ The key event is correlation rule **40112**: a burst of failed authentication at
 
 L1 never logs into the server and changes nothing — the job is to confirm or rule out a false positive within 10–15 minutes and package the facts for L2.
 
-1. **Validation.** 37 attempts in under 2 seconds is a machine pattern, not a human. A successful session immediately follows the failure burst.
+1. **Validation.** 37 alert events in under 2 seconds is a machine pattern, not a human. A successful session immediately follows the failure burst.
 2. **False-positive check.** `srcip 192.168.100.20` is an internal Kali host. In a real SOC, cross-check the asset inventory / authorized-scanner allowlists. Forgotten cron jobs and "user typos" are excluded by the pattern.
 3. **Enrichment.** The target is a standard account `u3` on a test host; there are no anomalies on this host in the 24 hours before the incident; the post-success session is short (opened and closed within the same second — typical brute-force "did it work?" verification behavior).
 4. **Verdict: true positive, P2** — successful brute-force.
@@ -109,7 +112,7 @@ Rule: 40112 "Multiple authentication failures followed by a success" (L12)
 Time: Nov 9, 19:48:36 UTC
 Target: host u3 / account "u3"
 Source: 192.168.100.20 (internal — verify ownership in CMDB)
-Evidence: 37 failed logins in <2s (5760/5557), then PAM session opened (5501)
+Evidence: ~37 alert events in <2s (5760/5557), then PAM session opened (5501)
 Context: no prior alerts on host in 24h; account is a standard user
 Requested: block 192.168.100.20 at firewall, force password reset for u3,
            review post-auth activity (last, auth.log, bash_history)
@@ -154,7 +157,7 @@ sudo iptables -A INPUT -p tcp -s 192.168.100.20 --dport 22 -j DROP
 | Account | `u3` |
 | Tool | hydra v9.x, ~16-password wordlist |
 | Wazuh rule | 40112 (L12) |
-| Indicators | 37× rule 5760 within 2 seconds, then PAM session opened (5501) |
+| Indicators | ~37 alert events (mostly 5760/5557) within 2 seconds, then PAM session opened (5501) |
 
 ---
 
