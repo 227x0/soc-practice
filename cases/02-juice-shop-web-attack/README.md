@@ -147,28 +147,74 @@ L1 never touches the target host — the job is to confirm the incident within 1
 5. **Visibility gap.** `GET /api/Users` with a stolen Bearer token is indistinguishable from a legit admin request and was **not visible in the SIEM**. Record it in the ticket — L1 cannot analyze what is not logged.
 6. **Verdict: true positive, P1/P2 — confirmed web compromise with PII exfiltration.**
 
-## Escalation Template
+## Escalation to L2
 
 ```
-[ESCALATION][P1/P2] Web app compromise: SQLi auth bypass + PII exfiltration
-Host: u3 (192.168.100.24), OWASP Juice Shop behind nginx
-Source: 192.168.100.20 (internal — verify ownership in CMDB)
-Timeline:
-  22:37:03Z     nmap/curl scan activity starts (Suricata rule 86601, 25 alerts over ~33 min)
-  22:37:03Z     POST /rest/user/login, body contains ' OR 1=1-- -> 200 + admin JWT (rule 31164)
-  23:00:08Z     nginx error message (rule 31301)
-  23:09:50Z     web server 500 Internal Error (rule 31122)
-  +minutes      GET /api/Users with Bearer token -> 200 (full user DB dump, not visible in SIEM)
-Impact: confidential document stolen; admin account takeover; full user PII exposed
-Evidence: Wazuh alert IDs (attach), Suricata eve.json flow 467587803163219.000000,
-          nginx access.log entries for src 192.168.100.20
-Visibility gap: /api/Users requests not observable in SIEM — verify nginx log collection
-Requested:
-  - Block 192.168.100.20 at firewall
-  - Invalidate all active JWT/sessions; force password reset (admin account first)
-  - Check nginx access.log for scope of data accessed via /api/* endpoints
-  - Review /ftp contents for other exposed files
-  - Deploy WAF (ModSecurity) + fix SQLi (parameterized queries) at app level
+# [ESCALATION][P1/P2] Web app compromise: SQLi auth bypass + PII exfiltration
+
+**Case ID:** SOC-2026-002
+**Escalated by:** SOC L1
+**Date:** 2026-11-09
+
+## Verdict
+
+**True positive.** Confirmed multi-stage web attack on the Juice Shop application, ending in admin account takeover and mass PII exfiltration. Source IP has no legitimate role; activity pattern is a textbook kill-chain (recon → exploitation → exfiltration).
+
+## Scope
+
+| | |
+|---|---|
+| **Target host** | u3 (192.168.100.24) — Ubuntu, nginx/1.28.3, OWASP Juice Shop, Wazuh agent `001` |
+| **Source IP** | 192.168.100.20 (internal — verify ownership in CMDB before blocking) |
+| **Affected assets** | Juice Shop web app: admin account, full user database, `/ftp` documents |
+
+## Timeline (UTC)
+
+| Time | Event | Evidence |
+|---|---|---|
+| 22:37:03 – 23:09:50Z | Scan / recon activity (nmap/curl) | Suricata rule 86601 (25 alerts); includes `ET SCAN Suspicious inbound to MSSQL port 1433` sid 2010935 |
+| ~22:37Z | POST `/rest/user/login`, body contains `' OR 1=1--` → 200 + admin JWT | Wazuh rule 31164 (SQL injection attempt, L6) + nginx access.log |
+| ~22:37Z | GET `/ftp/` → 200, GET `/ftp/acquisitions.md` → 200 | nginx access.log — confidential document exfiltrated |
+| 23:00:08Z | nginx error message | Wazuh rule 31301 |
+| 23:09:50Z | Web server 500 Internal Error | Wazuh rule 31122 (L5) |
+| +minutes | GET `/api/Users` with `Authorization: Bearer <admin JWT>` → 200 | ⚠️ Not visible in SIEM — see visibility gap below — full user DB dump |
+
+## Impact
+
+1. **Data leak** — confidential business document (`acquisitions.md`) downloaded.
+2. **Account takeover** — valid admin JWT issued for `admin@juice-sh.op` via SQL injection.
+3. **PII exfiltration** — entire user table retrieved through the authenticated admin API.
+
+## Evidence attached
+
+- Wazuh event export for agent `001`: `iocs/wazuh-events.csv`
+- 5-page Wazuh Threat Hunting report: `iocs/wazuh-threat-hunting-report.pdf`
+- Agent overview screenshot: `iocs/screenshots/wazuh-agent-overview.png`
+- Suricata alert example: `ET SCAN Suspicious inbound to MSSQL port 1433`, sid 2010935, severity 2, 1 pkt to server / 0 to client → probe only, port 1433 was closed
+- nginx access.log lines for src `192.168.100.20` (GET `/`, `/robots.txt`, `/ftp/`, `/ftp/acquisitions.md`, POST `/rest/user/login`)
+
+## ⚠️ Visibility gap (action needed)
+
+Requests to `GET /api/Users` with a stolen Bearer token were **not observable in the SIEM**. Network IDS does not flag authenticated API traffic, and the event was not found in the Wazuh index. **L1 cannot analyze what is not logged.**
+
+**Requested from engineering:** verify that nginx `access_log` for all vhosts is shipped by the Wazuh agent without rotation gaps; check Discover (`wazuh-alerts-*`) for the event; consider application-level audit logging of admin API access (who/what/when/src IP).
+
+## Requested actions (L2 / IR)
+
+1. **Containment:** block `192.168.100.20` at the firewall (after CMDB check).
+2. **Eradication:** invalidate all active JWTs/sessions; force password reset, starting with `admin@juice-sh.op`; rotate app secrets.
+3. **Scope review:** from nginx access.log — all `/api/*` and `/ftp/*` requests from the source IP; check `/ftp` for other exposed files.
+4. **Detection improvements:** deploy WAF (ModSecurity + OWASP CRS); enable/verify Suricata SQLi ruleset; alert on behavior pattern (new src IP → admin-scope API burst within minutes of login).
+
+## Root causes to fix (not L1 scope, flagging for awareness)
+
+- SQL injection in `/rest/user/login` — app must use parameterized queries.
+- Directory listing enabled on `/ftp` + sensitive files inside web root.
+- Reliance on `robots.txt` as access control.
+- Server version disclosure (`Server: nginx/1.28.3`).
+
+---
+*Prepared by L1 per case SOC-2026-002. No changes were made to any host.*
 ```
 
 ## Response (Reference — L2/IR)
