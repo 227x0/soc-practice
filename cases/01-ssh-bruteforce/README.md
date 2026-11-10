@@ -65,7 +65,7 @@ The agent on `u3` forwards events to the SIEM. During the attack Wazuh reported 
 
 ![Wazuh dashboard — 40 total alerts, 37 auth failures, 1 success](iocs/screenshots/wazuh-dashboard.png)
 
-The full attack window in the exported event log is **~12 seconds** (`19:48:24` → `19:48:36`).
+The full attack window in the exported event log is **~12 seconds** in Wazuh UI time (`19:48:32` → `19:48:36`). The underlying `/var/log/auth.log` timestamps are UTC (`18:48:48` → `18:49:01`) — the SIEM is configured to local time (UTC+1). A real fragment from `u3` is in [`iocs/auth.log.fragment`](iocs/auth.log.fragment).
 
 ### Event breakdown (from raw Wazuh export)
 
@@ -160,7 +160,7 @@ sudo iptables -A INPUT -p tcp -s 192.168.100.20 --dport 22 -j DROP
 
 ### Automation hardening
 
-- Configure Wazuh Active Response (`firewall-drop` on rule 5712) to automatically block the source.
+- Configure Wazuh Active Response (`firewall-drop` on the rules that actually fired: **5763** *sshd: brute force trying to get access to the system* and/or **5760** *sshd: authentication failed*) to automatically block the source.
 - Enable fail2ban / sshguard on the target host.
 - Disable SSH password authentication and switch to keys.
 
@@ -172,6 +172,7 @@ sudo iptables -A INPUT -p tcp -s 192.168.100.20 --dport 22 -j DROP
 |---|---|
 | Source IP | `192.168.100.20` (Kali) |
 | Target | `192.168.100.24:22` |
+| Source port (successful session) | `32778` |
 | Account | `u3` |
 | Tool | hydra v9.x, ~16-password wordlist |
 | Wazuh rule | 40112 (L12) |

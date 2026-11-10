@@ -19,7 +19,7 @@ Full-cycle home-lab incident: attacker (Kali) → target (Ubuntu Server + OWASP 
 
 An attacker from an internal IP runs a full kill-chain against a deliberately vulnerable web application (OWASP Juice Shop): port scanning, HTTP enumeration, path traversal to a hidden `/ftp` directory, SQL injection in the login form resulting in an admin JWT, and finally mass exfiltration of the user database via an authenticated admin API call.
 
-The L1 analyst's goal is to correlate the alert sequence into **one incident**, separate recon from confirmed compromise, and package facts for L2 — including a discovered **visibility gap** (API traffic with a stolen token is not detectable with current logging).
+The L1 analyst's goal is to correlate the alert sequence into **one incident**, separate recon from confirmed compromise, and package facts for L2 — including a discovered **visibility gap** (admin API abuse with a stolen JWT does not trigger a SIEM rule).
 
 ## Kill-chain view
 
@@ -54,7 +54,8 @@ Network: VirtualBox Host-only `192.168.100.0/24`. Wazuh agent + Suricata sensor 
 | [attack.md](attack.md) | Reconnaissance and exploitation commands, phase by phase |
 | [detection.md](detection.md) | What the SIEM saw: timeline, rule breakdown, Suricata example, MITRE mapping, screenshots |
 | [triage.md](triage.md) | L1 triage logic and checklist |
-| [templates/escalation.md](templates/escalation.md) | Full L2 escalation ticket with impact, evidence, visibility gap, and requested actions |
+| [templates/escalation.md](templates/escalation.md) | Short 10–15 line L2 escalation ticket |
+| [templates/full-report.md](templates/full-report.md) | Full L2 report with impact, evidence, visibility gap, and requested actions |
 | [response.md](response.md) | Containment, eradication, and hardening recommendations |
 | [lessons.md](lessons.md) | Key takeaways for a junior analyst |
 | [iocs/README.md](iocs/README.md) | Artifacts and indicators of compromise |

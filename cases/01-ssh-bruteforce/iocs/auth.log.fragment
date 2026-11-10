@@ -1,43 +1,29 @@
-# Fragment of /var/log/auth.log from the target host u3 during the brute-force
-# Timestamps are approximate and reconstructed from Wazuh alert timeline.
-
-Nov 09 19:48:35 u3 sshd[1000]: Failed password for u3 from 192.168.100.20 port 50000 ssh2
-Nov 09 19:48:34 u3 unix_chkpwd[2001]: password check failed for user (u3)
-Nov 09 19:48:34 u3 sshd[1002]: Failed password for u3 from 192.168.100.20 port 50002 ssh2
-Nov 09 19:48:34 u3 unix_chkpwd[2003]: password check failed for user (u3)
-Nov 09 19:48:35 u3 sshd[1004]: Failed password for u3 from 192.168.100.20 port 50004 ssh2
-Nov 09 19:48:34 u3 unix_chkpwd[2005]: password check failed for user (u3)
-Nov 09 19:48:35 u3 sshd[1006]: Failed password for u3 from 192.168.100.20 port 50006 ssh2
-Nov 09 19:48:34 u3 unix_chkpwd[2007]: password check failed for user (u3)
-Nov 09 19:48:34 u3 sshd[1008]: Failed password for u3 from 192.168.100.20 port 50008 ssh2
-Nov 09 19:48:34 u3 unix_chkpwd[2009]: password check failed for user (u3)
-Nov 09 19:48:35 u3 sshd[1010]: Failed password for u3 from 192.168.100.20 port 50010 ssh2
-Nov 09 19:48:35 u3 unix_chkpwd[2011]: password check failed for user (u3)
-Nov 09 19:48:35 u3 sshd[1012]: Failed password for u3 from 192.168.100.20 port 50012 ssh2
-Nov 09 19:48:34 u3 unix_chkpwd[2013]: password check failed for user (u3)
-Nov 09 19:48:34 u3 sshd[1014]: Failed password for u3 from 192.168.100.20 port 50014 ssh2
-Nov 09 19:48:35 u3 unix_chkpwd[2015]: password check failed for user (u3)
-Nov 09 19:48:35 u3 sshd[1016]: Failed password for u3 from 192.168.100.20 port 50016 ssh2
-Nov 09 19:48:34 u3 unix_chkpwd[2017]: password check failed for user (u3)
-Nov 09 19:48:34 u3 sshd[1018]: Failed password for u3 from 192.168.100.20 port 50018 ssh2
-Nov 09 19:48:34 u3 unix_chkpwd[2019]: password check failed for user (u3)
-Nov 09 19:48:35 u3 sshd[1020]: Failed password for u3 from 192.168.100.20 port 50020 ssh2
-Nov 09 19:48:34 u3 unix_chkpwd[2021]: password check failed for user (u3)
-Nov 09 19:48:35 u3 sshd[1022]: Failed password for u3 from 192.168.100.20 port 50022 ssh2
-Nov 09 19:48:34 u3 unix_chkpwd[2023]: password check failed for user (u3)
-Nov 09 19:48:34 u3 sshd[1024]: Failed password for u3 from 192.168.100.20 port 50024 ssh2
-Nov 09 19:48:34 u3 unix_chkpwd[2025]: password check failed for user (u3)
-Nov 09 19:48:34 u3 sshd[1026]: Failed password for u3 from 192.168.100.20 port 50026 ssh2
-Nov 09 19:48:34 u3 unix_chkpwd[2027]: password check failed for user (u3)
-Nov 09 19:48:35 u3 sshd[1028]: Failed password for u3 from 192.168.100.20 port 50028 ssh2
-Nov 09 19:48:34 u3 unix_chkpwd[2029]: password check failed for user (u3)
-Nov 09 19:48:34 u3 sshd[1030]: Failed password for u3 from 192.168.100.20 port 50030 ssh2
-Nov 09 19:48:34 u3 unix_chkpwd[2031]: password check failed for user (u3)
-Nov 09 19:48:34 u3 sshd[1032]: Failed password for u3 from 192.168.100.20 port 50032 ssh2
-Nov 09 19:48:34 u3 unix_chkpwd[2033]: password check failed for user (u3)
-Nov 09 19:48:35 u3 sshd[1034]: Failed password for u3 from 192.168.100.20 port 50034 ssh2
-Nov 09 19:48:35 u3 unix_chkpwd[2035]: password check failed for user (u3)
-Nov 09 19:48:35 u3 sshd[1036]: Failed password for u3 from 192.168.100.20 port 50036 ssh2
-Nov 09 19:48:36 u3 sshd[1038]: Accepted password for u3 from 192.168.100.20 port 50342 ssh2
-Nov 09 19:48:36 u3 systemd-logind[450]: New session 42 of user u3.
-Nov 09 19:48:36 u3 systemd-logind[450]: Session 42 logged out.
+2026-11-09T18:48:48.789011+00:00 u3 sshd-session[4331]: Received disconnect from 192.168.100.20 port 32772:11: Bye Bye [preauth]
+2026-11-09T18:48:48.801179+00:00 u3 sshd-session[4331]: Disconnected from authenticating user u3 192.168.100.20 port 32772 [preauth]
+2026-11-09T18:48:49.118946+00:00 u3 sshd-session[4333]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=192.168.100.20  user=u3
+2026-11-09T18:48:49.137881+00:00 u3 sshd-session[4334]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=192.168.100.20  user=u3
+2026-11-09T18:48:49.141781+00:00 u3 sshd-session[4335]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=192.168.100.20  user=u3
+2026-11-09T18:48:49.155237+00:00 u3 sshd-session[4336]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=192.168.100.20  user=u3
+2026-11-09T18:48:50.748411+00:00 u3 sshd-session[4333]: Failed password for u3 from 192.168.100.20 port 32794 ssh2
+2026-11-09T18:48:51.074829+00:00 u3 sshd-session[4335]: Failed password for u3 from 192.168.100.20 port 32802 ssh2
+2026-11-09T18:48:51.407725+00:00 u3 sshd-session[4336]: Failed password for u3 from 192.168.100.20 port 32778 ssh2
+2026-11-09T18:48:51.503348+00:00 u3 sshd-session[4334]: Failed password for u3 from 192.168.100.20 port 32800 ssh2
+2026-11-09T18:48:53.017116+00:00 u3 sshd-session[4333]: Failed password for u3 from 192.168.100.20 port 32794 ssh2
+2026-11-09T18:48:54.366641+00:00 u3 sshd-session[4336]: Failed password for u3 from 192.168.100.20 port 32778 ssh2
+2026-11-09T18:48:54.535799+00:00 u3 sshd-session[4334]: Failed password for u3 from 192.168.100.20 port 32800 ssh2
+2026-11-09T18:48:54.542318+00:00 u3 sshd-session[4335]: Failed password for u3 from 192.168.100.20 port 32802 ssh2
+2026-11-09T18:48:56.470264+00:00 u3 sshd-session[4333]: Failed password for u3 from 192.168.100.20 port 32794 ssh2
+2026-11-09T18:48:57.762760+00:00 u3 sshd-session[4335]: Failed password for u3 from 192.168.100.20 port 32802 ssh2
+2026-11-09T18:48:57.964562+00:00 u3 sshd-session[4336]: Failed password for u3 from 192.168.100.20 port 32778 ssh2
+2026-11-09T18:48:58.097990+00:00 u3 sshd-session[4334]: Failed password for u3 from 192.168.100.20 port 32800 ssh2
+2026-11-09T18:48:59.547153+00:00 u3 sshd-session[4336]: Accepted password for u3 from 192.168.100.20 port 32778 ssh2
+2026-11-09T18:48:59.760525+00:00 u3 sshd-session[4333]: Failed password for u3 from 192.168.100.20 port 32794 ssh2
+2026-11-09T18:49:00.978460+00:00 u3 sshd-session[4335]: Failed password for u3 from 192.168.100.20 port 32802 ssh2
+2026-11-09T18:49:01.055901+00:00 u3 sshd-session[4334]: Failed password for u3 from 192.168.100.20 port 32800 ssh2
+2026-11-09T18:49:01.102200+00:00 u3 sshd-session[4435]: Connection closed by 192.168.100.20 port 32778
+2026-11-09T18:49:01.163510+00:00 u3 sshd-session[4333]: Connection closed by authenticating user u3 192.168.100.20 port 32794 [preauth]
+2026-11-09T18:49:01.164261+00:00 u3 sshd-session[4333]: PAM 3 more authentication failures; logname= uid=0 euid=0 tty=ssh ruser= rhost=192.168.100.20  user=u3
+2026-11-09T18:49:01.187032+00:00 u3 sshd-session[4334]: Connection closed by authenticating user u3 192.168.100.20 port 32800 [preauth]
+2026-11-09T18:49:01.187488+00:00 u3 sshd-session[4334]: PAM 3 more authentication failures; logname= uid=0 euid=0 tty=ssh ruser= rhost=192.168.100.20  user=u3
+2026-11-09T18:49:01.198597+00:00 u3 sshd-session[4335]: Connection closed by authenticating user u3 192.168.100.20 port 32802 [preauth]
+2026-11-09T18:49:01.200253+00:00 u3 sshd-session[4335]: PAM 3 more authentication failures; logname= uid=0 euid=0 tty=ssh ruser= rhost=192.168.100.20  user=u3
