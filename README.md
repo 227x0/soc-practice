@@ -8,6 +8,7 @@
 | # | Name | Level | SIEM / Tools | Status |
 |---|------|-------|--------------|--------|
 | 01 | [SSH Brute-Force: from attack to L1 escalation](./cases/01-ssh-bruteforce) | Junior / L1 | Wazuh, VirtualBox, Kali, Ubuntu | ✅ Ready |
+| 02 | [Juice Shop Web Attack: recon → path traversal → SQLi → data exfiltration](./cases/02-juice-shop-web-attack) | Junior / L1 | Wazuh, Suricata, VirtualBox, Kali, Ubuntu, OWASP Juice Shop | ✅ Ready |
 
 ## Purpose of this repository
 

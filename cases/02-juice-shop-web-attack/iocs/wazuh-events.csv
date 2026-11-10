@@ -1,0 +1,50 @@
+timestamp,agent.name,rule.description,rule.level,rule.id
+"Nov 9, 2026 @ 23:09:50.679",u3,Suricata: Alert - ET HUNTING curl User-Agent to Dotted Quad,3,86601
+"Nov 9, 2026 @ 23:09:50.670",u3,Suricata: Alert - ET HUNTING curl User-Agent to Dotted Quad,3,86601
+"Nov 9, 2026 @ 23:09:50.659",u3,Suricata: Alert - ET HUNTING curl User-Agent to Dotted Quad,3,86601
+"Nov 9, 2026 @ 23:09:50.657",u3,Web server 500 error code (Internal Error).,5,31122
+"Nov 9, 2026 @ 23:05:02.497",u3,Suricata: Alert - ET HUNTING curl User-Agent to Dotted Quad,3,86601
+"Nov 9, 2026 @ 23:00:08.355",u3,Suricata: Alert - ET HUNTING curl User-Agent to Dotted Quad,3,86601
+"Nov 9, 2026 @ 23:00:08.347",u3,Suricata: Alert - ET HUNTING curl User-Agent to Dotted Quad,3,86601
+"Nov 9, 2026 @ 23:00:08.340",u3,Suricata: Alert - ET HUNTING curl User-Agent to Dotted Quad,3,86601
+"Nov 9, 2026 @ 23:00:08.331",u3,Nginx error message.,3,31301
+"Nov 9, 2026 @ 22:53:58.156",u3,Suricata: Alert - ET HUNTING curl User-Agent to Dotted Quad,3,86601
+"Nov 9, 2026 @ 22:53:58.148",u3,Suricata: Alert - ET HUNTING curl User-Agent to Dotted Quad,3,86601
+"Nov 9, 2026 @ 22:53:58.142",u3,Suricata: Alert - ET HUNTING curl User-Agent to Dotted Quad,3,86601
+"Nov 9, 2026 @ 22:45:03.849",u3,Suricata: Alert - ET SCAN Suspicious inbound to MSSQL port 1433,3,86601
+"Nov 9, 2026 @ 22:44:55.845",u3,Suricata: Alert - ET SCAN Suspicious inbound to PostgreSQL port 5432,3,86601
+"Nov 9, 2026 @ 22:44:25.704",u3,Suricata: Alert - ET SCAN Suspicious inbound to mySQL port 3306,3,86601
+"Nov 9, 2026 @ 22:40:13.578",u3,Attached USB Storage,3,81101
+"Nov 9, 2026 @ 22:40:11.590",u3,USB device disconnected,3,81102
+"Nov 9, 2026 @ 22:37:17.088",u3,Suricata: Alert - ET SCAN Possible Nmap User-Agent Observed,3,86601
+"Nov 9, 2026 @ 22:37:17.087",u3,Suricata: Alert - ET SCAN Nmap Scripting Engine User-Agent Detected (Nmap Scripting Engine),3,86601
+"Nov 9, 2026 @ 22:37:17.081",u3,Suricata: Alert - ET SCAN Possible Nmap User-Agent Observed,3,86601
+"Nov 9, 2026 @ 22:37:17.076",u3,Suricata: Alert - ET SCAN Nmap Scripting Engine User-Agent Detected (Nmap Scripting Engine),3,86601
+"Nov 9, 2026 @ 22:37:17.067",u3,Suricata: Alert - ET SCAN Possible Nmap User-Agent Observed,3,86601
+"Nov 9, 2026 @ 22:37:17.063",u3,Suricata: Alert - ET SCAN Nmap Scripting Engine User-Agent Detected (Nmap Scripting Engine),3,86601
+"Nov 9, 2026 @ 22:37:17.056",u3,Suricata: Alert - ET SCAN Possible Nmap User-Agent Observed,3,86601
+"Nov 9, 2026 @ 22:37:17.053",u3,Suricata: Alert - ET SCAN Nmap Scripting Engine User-Agent Detected (Nmap Scripting Engine),3,86601
+"Nov 9, 2026 @ 22:37:13.010",u3,Successful sudo to ROOT executed.,3,5402
+"Nov 9, 2026 @ 22:37:13.010",u3,PAM: Login session closed.,3,5502
+"Nov 9, 2026 @ 22:37:13.008",u3,PAM: Login session opened.,3,5501
+"Nov 9, 2026 @ 22:37:11.017",u3,Suricata: Alert - ET SCAN Suspicious inbound to MSSQL port 1433,3,86601
+"Nov 9, 2026 @ 22:37:11.013",u3,Suricata: Alert - ET SCAN Suspicious inbound to PostgreSQL port 5432,3,86601
+"Nov 9, 2026 @ 22:37:11.011",u3,Suricata: Alert - ET SCAN Suspicious inbound to mySQL port 3306,3,86601
+"Nov 9, 2026 @ 22:37:03.008",u3,Suricata: Alert - ET HUNTING curl User-Agent to Dotted Quad,3,86601
+"Nov 9, 2026 @ 22:37:03.004",u3,SQL injection attempt.,6,31164
+"Nov 9, 2026 @ 22:35:40.968",u3,PAM: Login session closed.,3,5502
+"Nov 9, 2026 @ 22:35:40.966",u3,Successful sudo to ROOT executed.,3,5402
+"Nov 9, 2026 @ 22:35:40.963",u3,PAM: Login session opened.,3,5501
+"Nov 9, 2026 @ 22:35:40.960",u3,PAM: Login session closed.,3,5502
+"Nov 9, 2026 @ 22:35:40.959",u3,First time user executed sudo.,4,5403
+"Nov 9, 2026 @ 22:35:40.959",u3,PAM: Login session opened.,3,5501
+"Nov 9, 2026 @ 22:35:29.177",u3,System Audit event.,3,516
+"Nov 9, 2026 @ 22:35:29.155",u3,System Audit event.,3,516
+"Nov 9, 2026 @ 22:35:29.129",u3,System Audit event.,3,516
+"Nov 9, 2026 @ 22:35:29.115",u3,System Audit event.,3,516
+"Nov 9, 2026 @ 22:35:29.113",u3,System Audit event.,3,516
+"Nov 9, 2026 @ 22:35:29.109",u3,System Audit event.,3,516
+"Nov 9, 2026 @ 22:35:29.097",u3,System Audit event.,3,516
+"Nov 9, 2026 @ 22:35:28.051",u3,PAM: Login session closed.,3,5502
+"Nov 9, 2026 @ 22:35:22.859",u3,Wazuh agent started.,3,503
+"Nov 9, 2026 @ 22:17:54.000",u3,Wazuh agent stopped.,3,506
