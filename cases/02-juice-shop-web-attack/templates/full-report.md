@@ -3,7 +3,7 @@
 # Full L2 Report
 
 ```
-# [ESCALATION][P1/P2] Web app compromise: SQLi auth bypass + PII exfiltration
+# [ESCALATION][P1] Web app compromise: SQLi auth bypass + PII exfiltration
 
 **Case ID:** SOC-2026-002
 **Escalated by:** SOC L1
@@ -30,7 +30,7 @@
 | ~22:37Z | GET `/ftp/` → 200, GET `/ftp/acquisitions.md` → 200 | nginx access.log — confidential document exfiltrated |
 | 23:00:08Z | nginx error message | Wazuh rule 31301 |
 | 23:09:50Z | Web server 500 Internal Error | Wazuh rule 31122 (L5) |
-| +minutes | GET `/api/Users` with `Authorization: Bearer <admin JWT>` → 200 | ⚠️ Not visible in SIEM — see visibility gap below — full user DB dump |
+| +minutes | GET `/api/Users` with `Authorization: Bearer <admin JWT obtained via SQLi>` → 200 | ⚠️ Not visible in SIEM — see visibility gap below — full user DB dump |
 
 ## Impact
 
@@ -48,7 +48,7 @@
 
 ## ⚠️ Visibility gap (action needed)
 
-`GET /api/Users` with a stolen Bearer token produced **no SIEM alert**. Network IDS does not flag authenticated API traffic, and there is currently no Wazuh rule for "admin API call from a new source IP". The underlying nginx `access.log` line may have been shipped, but without a rule it is not visible to L1.
+`GET /api/Users` with an admin Bearer token produced **no SIEM alert**. Network IDS does not flag authenticated API traffic, and there is currently no Wazuh rule for "admin API call from a new source IP". The underlying nginx `access.log` line may have been shipped, but without a rule it is not visible to L1.
 
 **Requested from engineering:** verify that nginx `access_log` for all vhosts is shipped by the Wazuh agent without rotation gaps; if `logall` is enabled, search archives for `/api/Users`; create an application-level audit rule for admin API access (who/what/when/src IP).
 

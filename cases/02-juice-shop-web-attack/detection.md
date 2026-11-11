@@ -14,7 +14,7 @@
 | 2 | 22:37:11.011 – 22:37:17.081 | nmap scan / port probes from `192.168.100.20` | Suricata | 25× rule **86601** (ET SCAN / ET HUNTING user-agents and port probes across the whole window) |
 | 3 | 23:00:08.331 | nginx error message | nginx error log | 1× rule **31301** |
 | 4 | 23:09:50.657 | Web server 500 Internal Error | Wazuh agent | 1× rule **31122** (L5) |
-| 5 | shortly after 22:37 | `GET /api/Users` with stolen Bearer token | **no alert in SIEM** | ⚠️ visibility gap — see below |
+| 5 | shortly after 22:37 | `GET /api/Users` with admin Bearer token | **no alert in SIEM** | ⚠️ visibility gap — see below |
 
 ### Unrelated host noise (same export window)
 
@@ -105,5 +105,5 @@ The final exfiltration request was sent with a valid admin JWT. In the current p
 - **T1046 Network Service Discovery** — port/service enumeration
 - **T1083 File and Directory Discovery** — `/ftp` enumeration via robots.txt
 - **T1190 Exploit Public-Facing Application** — path traversal + SQLi (Juice Shop)
-- **T1078 Valid Accounts** — use of the forged admin JWT
+- **T1078 Valid Accounts** — use of the admin JWT obtained via SQL injection
 - **T1005 Data from Local System** — `/api/Users` dump (PII exfiltration)

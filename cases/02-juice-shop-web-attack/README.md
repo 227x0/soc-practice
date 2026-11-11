@@ -19,7 +19,7 @@ Full-cycle home-lab incident: attacker (Kali) → target (Ubuntu Server + OWASP 
 
 An attacker from an internal IP runs a full kill-chain against a deliberately vulnerable web application (OWASP Juice Shop): port scanning, HTTP enumeration, path traversal to a hidden `/ftp` directory, SQL injection in the login form resulting in an admin JWT, and finally mass exfiltration of the user database via an authenticated admin API call.
 
-The L1 analyst's goal is to correlate the alert sequence into **one incident**, separate recon from confirmed compromise, and package facts for L2 — including a discovered **visibility gap** (admin API abuse with a stolen JWT does not trigger a SIEM rule).
+The L1 analyst's goal is to correlate the alert sequence into **one incident**, separate recon from confirmed compromise, and package facts for L2 — including a discovered **visibility gap** (admin API abuse with a JWT obtained via SQL injection does not trigger a SIEM rule).
 
 ## Kill-chain view
 
@@ -62,6 +62,6 @@ Network: VirtualBox Host-only `192.168.100.0/24`. Wazuh agent + Suricata sensor 
 
 ## Quick verdict
 
-**True positive, P1/P2 — confirmed web compromise with PII exfiltration.**
+**True positive, P1 — confirmed web compromise with PII exfiltration.**
 
 All activity from `192.168.100.20` maps to a single kill-chain: recon → enumeration → exploitation → exfiltration. The final `GET /api/Users` step was not visible in the SIEM and is documented as a visibility gap.

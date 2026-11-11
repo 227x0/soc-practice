@@ -21,7 +21,7 @@
 | SQLi rule | 31164 (SQL injection attempt), level 6 |
 | Web error rule | 31122 (Web server 500 error), level 5 |
 | SQLi payload | `' OR 1=1--` in JSON body of POST `/rest/user/login` |
-| Stolen artifact | Admin JWT for `admin@juice-sh.op` (role: admin) |
+| Artifact | Admin JWT for `admin@juice-sh.op` (role: admin), obtained via SQL injection |
 | Exfil endpoint | `GET /api/Users` (200, full user list) |
 | Leaked doc | `/ftp/acquisitions.md` (200) |
 | Behavior pattern | scan → robots.txt → `/ftp` → SQLi login → admin API burst, all within ~40 min from one src IP |
