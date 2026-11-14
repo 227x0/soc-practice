@@ -65,7 +65,7 @@ The agent on `u3` forwards events to the SIEM. During the attack Wazuh reported 
 
 ![Wazuh dashboard — 40 total alerts, 37 auth failures, 1 success](iocs/screenshots/wazuh-dashboard.png)
 
-The full attack window in the exported event log is **~12 seconds** in Wazuh UI time (`19:48:32` → `19:48:36`). The underlying `/var/log/auth.log` timestamps are UTC (`18:48:48` → `18:49:01`) — the SIEM is configured to local time (UTC+1). A real fragment from `u3` is in [`iocs/auth.log.fragment`](iocs/auth.log.fragment).
+The full attack window in the exported event log is **~12 seconds** in Wazuh UI time (`19:48:24` → `19:48:36`; the SIEM dashboard runs at local time, UTC+1). Hydra was executed more than once during the session: the Wazuh export above is run 1, and [`iocs/auth.log.fragment`](iocs/auth.log.fragment) captures run 2 as seen on the host itself (UTC, `18:48:48` → `18:49:01` — note the success at `18:48:59` from port `32778`, the source port quoted in the IOC table). Both runs show the identical pattern; the fragment is kept alongside the export because it demonstrates the ground truth the agent shipped from.
 
 ### Event breakdown (from raw Wazuh export)
 
@@ -82,7 +82,7 @@ The full attack window in the exported event log is **~12 seconds** in Wazuh UI 
 
 ### Key alert
 
-The key event is correlation rule **40112** at `2026-11-09T19:48:36.077Z`: a burst of failed authentication attempts followed by a success. This exact "failures → success" pattern is what separates brute-force from an ordinary user typo.
+The key event is correlation rule **40112** at `2026-11-09 19:48:36.077` (dashboard local time, UTC+1): a burst of failed authentication attempts followed by a success. This exact "failures → success" pattern is what separates brute-force from an ordinary user typo.
 
 ![Wazuh rule 40112 — alert details](iocs/screenshots/wazuh-rule-40112-details.png)
 
@@ -127,7 +127,7 @@ L1 never logs into the server and changes nothing — the job is to confirm or r
 ```
 [ESCALATION][P2] SSH brute-force SUCCESS on u3 (192.168.100.24)
 Rule: 40112 "Multiple authentication failures followed by a success" (L12)
-Time: 2026-11-09T19:48:36.077Z
+Time: 2026-11-09 19:48:36.077 (dashboard local time, UTC+1)
 Target: host u3 / account "u3"
 Source: 192.168.100.20:32778 (internal — verify ownership in CMDB)
 Evidence: 40 alert events in ~12s (5760/5557/5503), then PAM session opened (5501)

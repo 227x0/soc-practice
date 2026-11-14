@@ -1,0 +1,36 @@
+<!-- Local rules — SOC-2026-003 final applied state (from u1 manager container) -->
+
+<!-- Modify it at your will. -->
+<!-- Copyright (C) 2015, Wazuh Inc. -->
+
+<!-- Example -->
+<group name="local,syslog,sshd,">
+
+  <!--
+  Dec 10 01:02:02 host sshd[1234]: Failed none for root from 1.1.1.1 port 1066 ssh2
+  -->
+  <rule id="100001" level="5">
+    <if_sid>5716</if_sid>
+    <srcip>1.1.1.1</srcip>
+    <description>sshd: authentication failed from IP 1.1.1.1.</description>
+    <group>authentication_failed,pci_dss_10.2.4,pci_dss_10.2.5,</group>
+  </rule>
+
+</group>
+
+<!-- SOC-2026-003: lab escalation rules -->
+<!-- Stock rule 31164 "SQL injection attempt" (L6) already matches classic SQLi
+     patterns in web access logs. We escalate it to L12 for the lab so the alert
+     crosses the L1 triage threshold. -->
+<group name="web,attack,sql_injection,">
+  <rule id="100100" level="12">
+    <if_sid>31164</if_sid>
+    <description>SOC-LAB: SQLi pattern on web target escalated from stock rule 31164 (src: $(srcip), url: $(url))</description>
+    <mitre><id>T1190</id></mitre>
+  </rule>
+  <rule id="100200" level="10">
+    <if_group>audit</if_group>
+    <field name="audit.key">lab_exec</field>
+    <description>auditd: process execution event (key=lab_exec)</description>
+  </rule>
+</group>
