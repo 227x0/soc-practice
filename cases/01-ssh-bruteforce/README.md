@@ -18,9 +18,9 @@ Hands-on case from a home lab. Full cycle: **attacker (Kali) → target (Ubuntu 
 
 ## Summary
 
-An attacker from an internal IP address performs an SSH password brute-force attack against an Ubuntu server. Because the standard user account has a weak password, the attack ends with a successful login. Wazuh triggers correlation rule **40112** — a burst of failed authentication attempts followed by a success.
+An attacker from an internal IP runs an SSH password brute-force against an Ubuntu server. The standard user account has a weak password, so the attack ends with a successful login. Wazuh fires correlation rule **40112**: a burst of failed logins followed by one success.
 
-The L1 analyst's goal is to confirm the attack, rule out a false positive, and prepare a complete fact package for L2.
+The L1 analyst's job here is simple to say: confirm the attack, rule out a false positive, and prepare a complete fact package for L2.
 
 ---
 
@@ -46,10 +46,10 @@ printf "password\n123456\nqwerty\nletmein\nadmin\nroot\nubuntu\nwelcome\nabc123\
 hydra -l u3 -P ~/lab-pass.txt -t 4 -V -I ssh://192.168.100.24
 ```
 
-The password `u3:1` is in the wordlist — the attack succeeds on one of the last iterations.
+The password `u3:1` is in the wordlist, so the attack succeeds on one of the last iterations.
 
 > **Why the alert count is higher than the password count.**  
-> The wordlist has ~16 entries, but Wazuh logged **40 alert events**. One failed SSH password attempt can produce multiple log lines (for example, `sshd` rule **5760**, `unix_chkpwd` rule **5557**, and `PAM` rule **5503**), so the number of alerts is larger than the number of tried passwords.
+> The wordlist has ~16 entries, but Wazuh logged **40 alert events**. One failed SSH password attempt can produce several log lines (for example, `sshd` rule **5760**, `unix_chkpwd` rule **5557**, and `PAM` rule **5503**), so the alert count ends up bigger than the password count.
 
 ### Why this works
 
@@ -65,7 +65,7 @@ The agent on `u3` forwards events to the SIEM. During the attack Wazuh reported 
 
 ![Wazuh dashboard — 40 total alerts, 37 auth failures, 1 success](iocs/screenshots/wazuh-dashboard.png)
 
-The full attack window in the exported event log is **~12 seconds** in Wazuh UI time (`19:48:24` → `19:48:36`; the SIEM dashboard runs at local time, UTC+1). Hydra was executed more than once during the session: the Wazuh export above is run 1, and [`iocs/auth.log.fragment`](iocs/auth.log.fragment) captures run 2 as seen on the host itself (UTC, `18:48:48` → `18:49:01` — note the success at `18:48:59` from port `32778`, the source port quoted in the IOC table). Both runs show the identical pattern; the fragment is kept alongside the export because it demonstrates the ground truth the agent shipped from.
+The full attack window in the exported event log is **~12 seconds** in Wazuh UI time (`19:48:24` → `19:48:36`; the SIEM dashboard runs at local time, UTC+1). Hydra was executed more than once during the session: the Wazuh export above is run 1, and [`iocs/auth.log.fragment`](iocs/auth.log.fragment) captures run 2 as seen on the host itself (UTC, `18:48:48` to `18:49:01`; note the success at `18:48:59` from port `32778`, the source port quoted in the IOC table). Both runs show the same pattern. The fragment is kept next to the export because it shows the ground truth the agent shipped from.
 
 ### Event breakdown (from raw Wazuh export)
 
@@ -76,7 +76,7 @@ The full attack window in the exported event log is **~12 seconds** in Wazuh UI 
 | 4 | 5503 | 5 | `PAM: User login failed` |
 | 3 | 2502 | 10 | `User missed the password more than one time` |
 | 1 | 5763 | 10 | `sshd: brute force trying to get access to the system` |
-| 1 | 5501 | 3 | `PAM: Login session opened` — **login succeeded** |
+| 1 | 5501 | 3 | `PAM: Login session opened`, **login succeeded** |
 | 1 | 5502 | 3 | `PAM: Login session closed` |
 | 1 | **40112** | **12** | **«Multiple authentication failures followed by a success»** |
 
@@ -84,9 +84,9 @@ The full attack window in the exported event log is **~12 seconds** in Wazuh UI 
 
 The key event is correlation rule **40112** at `2026-11-09 19:48:36.077` (dashboard local time, UTC+1): a burst of failed authentication attempts followed by a success. This exact "failures → success" pattern is what separates brute-force from an ordinary user typo.
 
-![Wazuh rule 40112 — alert details](iocs/screenshots/wazuh-rule-40112-details.png)
+![Wazuh rule 40112, alert details](iocs/screenshots/wazuh-rule-40112-details.png)
 
-![Wazuh rule 40112 — MITRE mapping](iocs/screenshots/wazuh-rule-40112-mitre.png)
+![Wazuh rule 40112, MITRE mapping](iocs/screenshots/wazuh-rule-40112-mitre.png)
 
 ### Raw event export
 
@@ -97,19 +97,19 @@ A 5-page **Wazuh Threat Hunting report** for agent `u3` (PDF export) is also ava
 ### MITRE ATT&CK mapping
 
 - **T1110** Brute Force (Credential Access)
-- **T1078** Valid Accounts — successful use of the compromised `u3` credentials (Defense Evasion / Persistence / Privilege Escalation / Initial Access)
+- **T1078** Valid Accounts: successful use of the compromised `u3` credentials (Defense Evasion / Persistence / Privilege Escalation / Initial Access)
 - The follow-up SSH session maps to **T1021.004** Remote Services: SSH
 
 ---
 
 ## L1 Analyst Triage
 
-L1 never logs into the server and changes nothing — the job is to confirm or rule out a false positive within 10–15 minutes and package the facts for L2.
+L1 never logs into the server and changes nothing. The job is to confirm or rule out a false positive within 10–15 minutes and package the facts for L2.
 
 1. **Validation.** 40 alert events in ~12 seconds is a machine pattern, not a human. A successful PAM session immediately follows the failure burst.
 2. **False-positive check.** `srcip 192.168.100.20` is an internal Kali host. In a real SOC, cross-check the asset inventory / authorized-scanner allowlists. Forgotten cron jobs and "user typos" are excluded by the pattern.
-3. **Enrichment.** The target is a standard account `u3` on a test host; there are no anomalies on this host in the 24 hours before the incident; the post-success session is short (opened and closed within the same second — typical brute-force "did it work?" verification behavior).
-4. **Verdict: true positive, P2** — successful brute-force.
+3. **Enrichment.** The target is a standard account `u3` on a test host; there are no anomalies on this host in the 24 hours before the incident; the post-success session is short (opened and closed within the same second, which is typical "did it work?" behavior after brute-force).
+4. **Verdict: true positive, P2.** Successful brute-force.
 
 ### L1 checklist
 
@@ -129,7 +129,7 @@ L1 never logs into the server and changes nothing — the job is to confirm or r
 Rule: 40112 "Multiple authentication failures followed by a success" (L12)
 Time: 2026-11-09 19:48:36.077 (dashboard local time, UTC+1)
 Target: host u3 / account "u3"
-Source: 192.168.100.20:32778 (internal — verify ownership in CMDB)
+Source: 192.168.100.20:32778 (internal, verify ownership in CMDB)
 Evidence: 40 alert events in ~12s (5760/5557/5503), then PAM session opened (5501)
 Context: no prior alerts on host in 24h; account is a standard user
 Requested: block 192.168.100.20 at firewall, force password reset for u3,
@@ -143,7 +143,7 @@ Requested: block 192.168.100.20 at firewall, force password reset for u3,
 ### Immediate containment
 
 ```bash
-# On target (lab). In production — block at the perimeter firewall / VPN.
+# On target (lab). In production, block at the perimeter firewall / VPN.
 sudo iptables -A INPUT -p tcp -s 192.168.100.20 --dport 22 -j DROP
 ```
 
@@ -160,7 +160,7 @@ sudo iptables -A INPUT -p tcp -s 192.168.100.20 --dport 22 -j DROP
 
 ### Automation hardening
 
-- Configure Wazuh Active Response (`firewall-drop` on the rules that actually fired: **5763** *sshd: brute force trying to get access to the system* and/or **5760** *sshd: authentication failed*) to automatically block the source.
+- Configure Wazuh Active Response (`firewall-drop` on the rules that actually fired: **5763** *sshd: brute force trying to get access to the system* and/or **5760** *sshd: authentication failed*) so the source gets blocked automatically.
 - Enable fail2ban / sshguard on the target host.
 - Disable SSH password authentication and switch to keys.
 
@@ -182,16 +182,16 @@ sudo iptables -A INPUT -p tcp -s 192.168.100.20 --dport 22 -j DROP
 
 ## Takeaways
 
-- The "N failures + success" correlation is a basic but reliable brute-force detection; rule 40112 catches hydra out of the box, even with `-t 4`.
-- The most valuable part of the alert is not the failures themselves but the **successful session after them** — that's what turns noise into an incident.
-- L1 = triage and routing: the entire value is a correct verdict and a complete fact package for L2.
-- Bonus infrastructure lesson: a SIEM must be protected from itself — Wazuh's vulnerability-scanner feed (~9GB) plus an event queue ballooning on a dead indexer filled the lab's 30GB disk and took the whole stack down. Prevention: disable vulnerability-detection on small labs, rotate container logs, use `restart: always`, and keep VM snapshots.
+- The "N failures + success" correlation is basic but reliable. Rule 40112 catches hydra out of the box, even with `-t 4`.
+- The most valuable part of the alert isn't the failures themselves. It's the **successful session after them**. That's what turns noise into an incident.
+- L1 is triage and routing. The entire value is a correct verdict and a complete fact package for L2.
+- Bonus infrastructure lesson: a SIEM has to be protected from itself. Wazuh's vulnerability-scanner feed (~9GB) plus an event queue ballooning on a dead indexer filled the lab's 30GB disk and took the whole stack down. Prevention: disable vulnerability-detection on small labs, rotate container logs, use `restart: always`, and keep VM snapshots.
 
 ---
 
 ## References
 
-- [Wazuh ruleset — SSH](https://documentation.wazuh.com/current/user-manual/ruleset/ruleset.html)
-- [MITRE ATT&CK T1110 — Brute Force](https://attack.mitre.org/techniques/T1110/)
-- [MITRE ATT&CK T1021.004 — Remote Services: SSH](https://attack.mitre.org/techniques/T1021/004/)
+- [Wazuh ruleset: SSH](https://documentation.wazuh.com/current/user-manual/ruleset/ruleset.html)
+- [MITRE ATT&CK T1110, Brute Force](https://attack.mitre.org/techniques/T1110/)
+- [MITRE ATT&CK T1021.004, Remote Services: SSH](https://attack.mitre.org/techniques/T1021/004/)
 - [OWASP Testing for Brute Force](https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/04-Authentication_Testing/04-Testing_for_Brute_Force.html)

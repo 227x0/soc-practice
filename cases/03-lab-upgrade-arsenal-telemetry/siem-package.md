@@ -1,4 +1,4 @@
-# SIEM Package (u1 .22) — applied and verified
+# SIEM Package (u1 .22), applied and verified
 
 ## Discovery: stock ruleset already detects SQLi
 
@@ -13,7 +13,7 @@ Before writing custom rules, a `wazuh-logtest` run against a synthetic SQLi acce
 **Alert to be generated.
 ```
 
-So the detection-engineering roadmap item from SOC-2026-002 ("custom Wazuh rules for SQLi") was reframed: what the lab actually needs is not *new* pattern matching but an **escalation** — stock rule 31164 sits at level 6, below the L1 triage threshold.
+So the detection-engineering roadmap item from SOC-2026-002 ("custom Wazuh rules for SQLi") was reframed: what the lab actually needs is not *new* pattern matching but an **escalation**: stock rule 31164 sits at level 6, below the L1 triage threshold.
 
 ## Rules applied
 
@@ -21,8 +21,8 @@ So the detection-engineering roadmap item from SOC-2026-002 ("custom Wazuh rules
 
 | rule | level | logic |
 |---|---|---|
-| **100100** | 12 | `<if_sid>31164</if_sid>` — escalates stock SQLi detection to L12 with srcip/url in the description, MITRE T1190 |
-| **100200** | 10 | `audit.key = lab_exec` — groups auditd process-execution events from the u3 telemetry upgrade |
+| **100100** | 12 | `<if_sid>31164</if_sid>`: escalates stock SQLi detection to L12 with srcip/url in the description, MITRE T1190 |
+| **100200** | 10 | `audit.key = lab_exec`: groups auditd process-execution events from the u3 telemetry upgrade |
 
 ### Verified with wazuh-logtest
 
@@ -45,7 +45,7 @@ Output:
 Two, both self-inflicted and worth remembering:
 
 1. **`$(url)` inside a heredoc through nested SSH** gets expanded by the outer shell (`url: command not found`) and writes garbage into the target file. When pushing config through multiple shell layers, use base64 payloads, not heredocs.
-2. **`</rules>` is not a real tag.** `local_rules.xml` has no root element — appending a closing `</rules>` makes `wazuh-analysisd` fail with `XMLERR: Element not opened` and **no rules load at all** (manager boots, everything silently unprotected). The stock file simply ends after the last `</group>`.
+2. **`</rules>` is not a real tag.** `local_rules.xml` has no root element. Appending a closing `</rules>` makes `wazuh-analysisd` fail with `XMLERR: Element not opened` and **no rules load at all** (manager boots, everything silently unprotected). The stock file simply ends after the last `</group>`.
 
 ## Analyst utilities on u1
 

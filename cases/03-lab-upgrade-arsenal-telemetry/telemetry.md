@@ -16,14 +16,14 @@ sudo service auditd restart
 sudo auditctl -l    # verify rules are loaded
 ```
 
-What this buys the Blue Team — every one of these now lands in `/var/log/audit/audit.log` and ships to the SIEM:
+Every one of these now lands in `/var/log/audit/audit.log` and ships to the SIEM:
 
 | key | catches |
 |---|---|
-| `lab_exec` | every executed command — post-exploitation timelines |
+| `lab_exec` | every executed command: post-exploitation timelines |
 | `lab_identity` | user add / password tampering (`/etc/passwd`, `/etc/shadow`) |
 | `lab_nginx_cfg` | reverse-proxy tampering (new routes to hide C2, etc.) |
-| `lab_ssh_keys` | planted authorized_keys — persistence |
+| `lab_ssh_keys` | planted authorized_keys: persistence |
 | `lab_webroot` | dropped webshells |
 
 ## Wazuh agent — shipping audit.log
@@ -37,7 +37,7 @@ Added to `/var/ossec/etc/ossec.conf`:
 </localfile>
 ```
 
-(Back up before editing; verify with `grep -c "</ossec_config>"` — must be 1. This host already had a copy-paste accident documented in `soc-lab/target-host.md` — the ritual exists for a reason.)
+(Back up before editing; verify with `grep -c "</ossec_config>"`; must be 1. This host already had a copy-paste accident documented in `soc-lab/target-host.md`, so the ritual exists for a reason.)
 
 Then `sudo systemctl restart wazuh-agent`; confirm in `/var/ossec/logs/ossec.log`:
 
@@ -54,7 +54,7 @@ wazuh-logcollector: ERROR: (1235): Invalid value for element 'log_format': audit
 wazuh-logcollector: ERROR: (1235): Invalid value for element 'log_format': audit_log.
 ```
 
-(the valid-token strings are absent from the binary at all). The accepted fallback is plain `syslog`: lines ship as raw text and are matched manager-side. If your build accepts `auditd`, prefer it — but test the config before restart; a broken `ossec.conf` takes the whole agent down (observed live: agent failed to start, service exited with error until fixed).
+(the valid-token strings are absent from the binary at all). The accepted fallback is plain `syslog`: lines ship as raw text and are matched manager-side. If your build accepts `auditd`, prefer it, but test the config before restart. A broken `ossec.conf` takes the whole agent down (observed live: the agent failed to start and the service exited with error until fixed).
 
 ## Verification that telemetry flows
 
