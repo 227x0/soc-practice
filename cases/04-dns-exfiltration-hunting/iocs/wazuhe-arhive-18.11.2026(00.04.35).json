@@ -1,0 +1,275 @@
+[
+  {
+    "timestamp": "2026-11-17T23:04:35.139Z",
+    "domain": "0.o8h0OzjeFAd7nFWTjNoMOAaq5Xjx6IxlnuN8jt8tNnxryOYc2X.exfil.lab",
+    "type": "request",
+    "src_ip": "192.168.100.20",
+    "dst_ip": "192.168.100.24"
+  },
+  {
+    "timestamp": "2026-11-17T23:04:35.140Z",
+    "domain": "0.o8h0OzjeFAd7nFWTjNoMOAaq5Xjx6IxlnuN8jt8tNnxryOYc2X.exfil.lab",
+    "type": "response",
+    "src_ip": "192.168.100.24",
+    "dst_ip": "192.168.100.20"
+  },
+  {
+    "timestamp": "2026-11-17T23:04:35.141Z",
+    "domain": "1.XTluWciWORtBG8bYKrhYBAjXdS0tHxesr0eWSWPcOXKSnWfI0a.exfil.lab",
+    "type": "request",
+    "src_ip": "192.168.100.20",
+    "dst_ip": "192.168.100.24"
+  },
+  {
+    "timestamp": "2026-11-17T23:04:35.143Z",
+    "domain": "1.XTluWciWORtBG8bYKrhYBAjXdS0tHxesr0eWSWPcOXKSnWfI0a.exfil.lab",
+    "type": "response",
+    "src_ip": "192.168.100.24",
+    "dst_ip": "192.168.100.20"
+  },
+  {
+    "timestamp": "2026-11-17T23:04:35.147Z",
+    "domain": "2.D3uXXHzXBe76CsLlJbCX1QtbNPK79SnNg4As8zE7Gzl19GeZIt.exfil.lab",
+    "type": "request",
+    "src_ip": "192.168.100.20",
+    "dst_ip": "192.168.100.24"
+  },
+  {
+    "timestamp": "2026-11-17T23:04:35.148Z",
+    "domain": "2.D3uXXHzXBe76CsLlJbCX1QtbNPK79SnNg4As8zE7Gzl19GeZIt.exfil.lab",
+    "type": "response",
+    "src_ip": "192.168.100.24",
+    "dst_ip": "192.168.100.20"
+  },
+  {
+    "timestamp": "2026-11-17T23:04:35.151Z",
+    "domain": "3.FoRzghDiXd0V3sEmND3T8ym5vj0xxGVB3F6XqUV7ETPZyCBzIX.exfil.lab",
+    "type": "request",
+    "src_ip": "192.168.100.20",
+    "dst_ip": "192.168.100.24"
+  },
+  {
+    "timestamp": "2026-11-17T23:04:35.154Z",
+    "domain": "3.FoRzghDiXd0V3sEmND3T8ym5vj0xxGVB3F6XqUV7ETPZyCBzIX.exfil.lab",
+    "type": "response",
+    "src_ip": "192.168.100.24",
+    "dst_ip": "192.168.100.20"
+  },
+  {
+    "timestamp": "2026-11-17T23:04:35.156Z",
+    "domain": "4.T6jo5EzevmQ9W2UBgWRJwMsRmKjPXkxBXfFX1Kxhi9n6CGmcbA.exfil.lab",
+    "type": "request",
+    "src_ip": "192.168.100.20",
+    "dst_ip": "192.168.100.24"
+  },
+  {
+    "timestamp": "2026-11-17T23:04:35.158Z",
+    "domain": "4.T6jo5EzevmQ9W2UBgWRJwMsRmKjPXkxBXfFX1Kxhi9n6CGmcbA.exfil.lab",
+    "type": "response",
+    "src_ip": "192.168.100.24",
+    "dst_ip": "192.168.100.20"
+  },
+  {
+    "timestamp": "2026-11-17T23:04:35.162Z",
+    "domain": "5.E8mBG8ScNvxjQx694lX2usB0Fy7jVIH42CKeI6NXj1rqpnqg9t.exfil.lab",
+    "type": "request",
+    "src_ip": "192.168.100.20",
+    "dst_ip": "192.168.100.24"
+  },
+  {
+    "timestamp": "2026-11-17T23:04:35.164Z",
+    "domain": "5.E8mBG8ScNvxjQx694lX2usB0Fy7jVIH42CKeI6NXj1rqpnqg9t.exfil.lab",
+    "type": "response",
+    "src_ip": "192.168.100.24",
+    "dst_ip": "192.168.100.20"
+  },
+  {
+    "timestamp": "2026-11-17T23:04:35.168Z",
+    "domain": "6.Xe7m0Y8X0chkhK586WRw9BTQEUdQfPhJ3A23FRExd8XTrcbYvi.exfil.lab",
+    "type": "request",
+    "src_ip": "192.168.100.20",
+    "dst_ip": "192.168.100.24"
+  },
+  {
+    "timestamp": "2026-11-17T23:04:35.170Z",
+    "domain": "6.Xe7m0Y8X0chkhK586WRw9BTQEUdQfPhJ3A23FRExd8XTrcbYvi.exfil.lab",
+    "type": "response",
+    "src_ip": "192.168.100.24",
+    "dst_ip": "192.168.100.20"
+  },
+  {
+    "timestamp": "2026-11-17T23:04:35.171Z",
+    "domain": "7.2ZKkfy33SzdrnFrdajhL4kU9erdn5GeaKBFTmGzRunqpDRddLn.exfil.lab",
+    "type": "request",
+    "src_ip": "192.168.100.20",
+    "dst_ip": "192.168.100.24"
+  },
+  {
+    "timestamp": "2026-11-17T23:04:35.175Z",
+    "domain": "7.2ZKkfy33SzdrnFrdajhL4kU9erdn5GeaKBFTmGzRunqpDRddLn.exfil.lab",
+    "type": "response",
+    "src_ip": "192.168.100.24",
+    "dst_ip": "192.168.100.20"
+  },
+  {
+    "timestamp": "2026-11-17T23:04:35.177Z",
+    "domain": "8.yeEwk3gvfKY2lJHXKSXUdYeSwHYBG3D4wRJriXiE3Tn8CNkL5x.exfil.lab",
+    "type": "request",
+    "src_ip": "192.168.100.20",
+    "dst_ip": "192.168.100.24"
+  },
+  {
+    "timestamp": "2026-11-17T23:04:35.181Z",
+    "domain": "8.yeEwk3gvfKY2lJHXKSXUdYeSwHYBG3D4wRJriXiE3Tn8CNkL5x.exfil.lab",
+    "type": "response",
+    "src_ip": "192.168.100.24",
+    "dst_ip": "192.168.100.20"
+  },
+  {
+    "timestamp": "2026-11-17T23:04:35.182Z",
+    "domain": "9.T5rt4zXVdl524ZRqM0ApbPl5yFdWYIDzoMlXuHCehmZ2Bs0Cdv.exfil.lab",
+    "type": "request",
+    "src_ip": "192.168.100.20",
+    "dst_ip": "192.168.100.24"
+  },
+  {
+    "timestamp": "2026-11-17T23:04:35.184Z",
+    "domain": "9.T5rt4zXVdl524ZRqM0ApbPl5yFdWYIDzoMlXuHCehmZ2Bs0Cdv.exfil.lab",
+    "type": "response",
+    "src_ip": "192.168.100.24",
+    "dst_ip": "192.168.100.20"
+  },
+  {
+    "timestamp": "2026-11-17T23:04:35.186Z",
+    "domain": "10.iU4RwJSx3ilTFs8Gbnxnjikx7xXf9RLIWuGTDHdLK80LtXrUMX.exfil.lab",
+    "type": "request",
+    "src_ip": "192.168.100.20",
+    "dst_ip": "192.168.100.24"
+  },
+  {
+    "timestamp": "2026-11-17T23:04:35.190Z",
+    "domain": "10.iU4RwJSx3ilTFs8Gbnxnjikx7xXf9RLIWuGTDHdLK80LtXrUMX.exfil.lab",
+    "type": "response",
+    "src_ip": "192.168.100.24",
+    "dst_ip": "192.168.100.20"
+  },
+  {
+    "timestamp": "2026-11-17T23:04:35.193Z",
+    "domain": "11.rFZcpdbfxkh2GXLTkd87RhH1gXi0xhXwlXUXy1Rq8KH1eIdtdQ.exfil.lab",
+    "type": "request",
+    "src_ip": "192.168.100.20",
+    "dst_ip": "192.168.100.24"
+  },
+  {
+    "timestamp": "2026-11-17T23:04:35.195Z",
+    "domain": "11.rFZcpdbfxkh2GXLTkd87RhH1gXi0xhXwlXUXy1Rq8KH1eIdtdQ.exfil.lab",
+    "type": "response",
+    "src_ip": "192.168.100.24",
+    "dst_ip": "192.168.100.20"
+  },
+  {
+    "timestamp": "2026-11-17T23:04:35.197Z",
+    "domain": "12.nK1Nis9KZhNXSwDCBWSxqzqLpIrrxX8xaPhWNUjPB4K2EVE2BA.exfil.lab",
+    "type": "request",
+    "src_ip": "192.168.100.20",
+    "dst_ip": "192.168.100.24"
+  },
+  {
+    "timestamp": "2026-11-17T23:04:35.201Z",
+    "domain": "12.nK1Nis9KZhNXSwDCBWSxqzqLpIrrxX8xaPhWNUjPB4K2EVE2BA.exfil.lab",
+    "type": "response",
+    "src_ip": "192.168.100.24",
+    "dst_ip": "192.168.100.20"
+  },
+  {
+    "timestamp": "2026-11-17T23:04:35.202Z",
+    "domain": "0.o8h0ozjefad7nfwtjnomoaaq5xjx6ixlnun8jt8tnnxryoyc2x.exfil.lab",
+    "type": "dnsmasq_query",
+    "src_ip": "192.168.100.20",
+    "dst_ip": "192.168.100.24"
+  },
+  {
+    "timestamp": "2026-11-17T23:04:35.208Z",
+    "domain": "1.xtluwciwortbg8bykrhybajxds0thxesr0ewswpcoxksnwfi0a.exfil.lab",
+    "type": "dnsmasq_query",
+    "src_ip": "192.168.100.20",
+    "dst_ip": "192.168.100.24"
+  },
+  {
+    "timestamp": "2026-11-17T23:04:35.212Z",
+    "domain": "2.d3uxxhzxbe76cslljbcx1qtbnpk79snng4as8ze7gzl19gezit.exfil.lab",
+    "type": "dnsmasq_query",
+    "src_ip": "192.168.100.20",
+    "dst_ip": "192.168.100.24"
+  },
+  {
+    "timestamp": "2026-11-17T23:04:35.219Z",
+    "domain": "3.forzghdixd0v3semnd3t8ym5vj0xxgvb3f6xquv7etpzycbzix.exfil.lab",
+    "type": "dnsmasq_query",
+    "src_ip": "192.168.100.20",
+    "dst_ip": "192.168.100.24"
+  },
+  {
+    "timestamp": "2026-11-17T23:04:35.224Z",
+    "domain": "4.t6jo5ezevmq9w2ubgwrjwmsrmkjpxkxbxffx1kxhi9n6cgmcba.exfil.lab",
+    "type": "dnsmasq_query",
+    "src_ip": "192.168.100.20",
+    "dst_ip": "192.168.100.24"
+  },
+  {
+    "timestamp": "2026-11-17T23:04:35.227Z",
+    "domain": "5.e8mbg8scnvxjqx694lx2usb0fy7jvih42ckei6nxj1rqpnqg9t.exfil.lab",
+    "type": "dnsmasq_query",
+    "src_ip": "192.168.100.20",
+    "dst_ip": "192.168.100.24"
+  },
+  {
+    "timestamp": "2026-11-17T23:04:35.232Z",
+    "domain": "6.xe7m0y8x0chkhk586wrw9btqeudqfphj3a23frexd8xtrcbyvi.exfil.lab",
+    "type": "dnsmasq_query",
+    "src_ip": "192.168.100.20",
+    "dst_ip": "192.168.100.24"
+  },
+  {
+    "timestamp": "2026-11-17T23:04:35.239Z",
+    "domain": "7.2zkkfy33szdrnfrdajhl4ku9erdn5geakbftmgzrunqpdrddln.exfil.lab",
+    "type": "dnsmasq_query",
+    "src_ip": "192.168.100.20",
+    "dst_ip": "192.168.100.24"
+  },
+  {
+    "timestamp": "2026-11-17T23:04:35.244Z",
+    "domain": "8.yeewk3gvfky2ljhxksxudyeswhybg3d4wrjrixie3tn8cnkl5x.exfil.lab",
+    "type": "dnsmasq_query",
+    "src_ip": "192.168.100.20",
+    "dst_ip": "192.168.100.24"
+  },
+  {
+    "timestamp": "2026-11-17T23:04:35.247Z",
+    "domain": "9.t5rt4zxvdl524zrqm0apbpl5yfdwyidzomlxuhcehmz2bs0cdv.exfil.lab",
+    "type": "dnsmasq_query",
+    "src_ip": "192.168.100.20",
+    "dst_ip": "192.168.100.24"
+  },
+  {
+    "timestamp": "2026-11-17T23:04:35.251Z",
+    "domain": "10.iu4rwjsx3iltfs8gbnxnjikx7xxf9rliwugtdhdlk80ltxrumx.exfil.lab",
+    "type": "dnsmasq_query",
+    "src_ip": "192.168.100.20",
+    "dst_ip": "192.168.100.24"
+  },
+  {
+    "timestamp": "2026-11-17T23:04:35.257Z",
+    "domain": "11.rfzcpdbfxkh2gxltkd87rhh1gxi0xhxwlxuxy1rq8kh1eidtdq.exfil.lab",
+    "type": "dnsmasq_query",
+    "src_ip": "192.168.100.20",
+    "dst_ip": "192.168.100.24"
+  },
+  {
+    "timestamp": "2026-11-17T23:04:35.263Z",
+    "domain": "12.nk1nis9kzhnxswdcbwsxqzqlpirrxx8xaphwnujpb4k2eve2ba.exfil.lab",
+    "type": "dnsmasq_query",
+    "src_ip": "192.168.100.20",
+    "dst_ip": "192.168.100.24"
+  }
+]
