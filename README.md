@@ -1,5 +1,12 @@
 # SOC Practice Cases
 
+![Cases](https://img.shields.io/badge/cases-4-e94560)
+![SIEM](https://img.shields.io/badge/SIEM-Wazuh%204.14-blue)
+![IDS](https://img.shields.io/badge/IDS-Suricata-red)
+![EDR](https://img.shields.io/badge/EDR-Velociraptor-green)
+![MITRE](https://img.shields.io/badge/MITRE%20ATT%26CK-mapped-0f3460)
+![License](https://img.shields.io/badge/license-MIT-lightgrey)
+
 > Home cybersecurity lab: hands-on SOC L1 cases.  
 > Each case covers the full cycle: **attack → detection → triage → escalation → response**.
 
