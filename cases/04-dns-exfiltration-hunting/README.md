@@ -1,5 +1,6 @@
 > [!NOTE]
-> Case core is complete (attack, detection, triage, lessons). Response section TODO.
+> Case complete. Escalation/full-report templates intentionally left as skeletons —
+> this case demonstrates detection and triage; worked ticket examples live in cases 01–02.
 > Educational home-lab case. All addresses, accounts and passwords are fictional
 > and used only in an isolated environment.
 
@@ -18,7 +19,7 @@ detection (Wazuh archives + Suricata) → L1 triage → L2 escalation**.
 | **Domain** | SOC, DNS tunneling, Network Security |
 | **MITRE ATT&CK** | T1071.004 Application Layer Protocol: DNS, T1048 Exfiltration Over Alternative Protocol |
 | **SIEM** | Wazuh 4.14 (single-node, Docker) + Suricata 8.x IDS |
-| **Status** | 🚧 Draft (response section TODO) |
+| **Status** | ✅ Ready |
 
 ## Summary
 
@@ -68,9 +69,9 @@ published in the domain's NS record — reached through the victim's own resolve
 | [01-attack.md](01-attack.md) | ✅ Done (tool, execution, why it worked) |
 | 02-detection.md | ✅ Done (timeline, two sources, 39 events / 0 alerts) |
 | 03-triage.md | ✅ Done (validation → verdict) |
-| 04-response.md | 🚧 TODO |
+| 04-response.md | ✅ Done (containment / eradication / hardening) |
 | 05-lessons.md | ✅ Done |
-| templates/ | ✅ Done (short escalation + full report) |
+| templates/ | 📝 Skeletons kept deliberately (author's choice) |
 | iocs/ | ✅ Done (JSON export, dig capture, screenshot) |
 
 ## Quick verdict
