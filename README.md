@@ -18,6 +18,7 @@
 | 02 | [Juice Shop Web Attack: recon → path traversal → SQLi → data exfiltration](./cases/02-juice-shop-web-attack) | Junior / L1 | Wazuh, Suricata, VirtualBox, Kali, Ubuntu, OWASP Juice Shop | ✅ Ready |
 | 03 | [Lab Upgrade: Arsenal & Telemetry](./cases/03-lab-upgrade-arsenal-telemetry) | Junior / L1 | Wazuh, auditd, ProjectDiscovery stack, VirtualBox | ✅ Ready |
 | 04 | [DNS Exfiltration: From Attack to L1 Escalation](./cases/04-dns-exfiltration-hunting) | Junior / L1 | Wazuh, Suricata, dnsmasq, bash | ✅ Ready |
+| 05 | [Post-Exploitation Hunt: SSH Compromise & Persistence](./cases/05-post-exploitation-hunt) | Junior / L1 (L2 elements) | Wazuh, auditd lab_exec, Velociraptor, ausearch | ✅ Ready |
 
 ## Purpose of this repository
 
